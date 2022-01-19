@@ -1,0 +1,40 @@
+WITH 
+    table1 AS(
+SELECT 
+        s.submission_date,
+        COUNT(DISTINCT(s.submission_id)) AS count_sub,
+        ROW_NUMBER() OVER (PARTITION BY submission_date ORDER BY COUNT(DISTINCT(s.submission_id)) DESC,h.hacker_id) as rank#,
+        h.name,
+        h.hacker_id  
+FROM Submissions AS s
+INNER JOIN Hackers AS h
+ON s.hacker_id = h.hacker_id
+GROUP BY s.submission_date, h.name, h.hacker_id
+),
+
+table2 AS (
+         SELECT s.submission_date, COUNT(DISTINCT(s.hacker_id)) AS num_sub 
+            FROM (
+                SELECT s0.submission_date,
+                        ROW_NUMBER() OVER(PARTITION BY s0.hacker_id ORDER BY s0.submission_date) AS row_num,
+                        s0.hacker_id,
+                        DATEPART(DAY, s0.submission_date) AS day
+                    FROM(
+                        SELECT submission_date, hacker_id
+                            FROM submissions
+                            GROUP BY submission_date, hacker_id) AS s0
+         )AS s
+WHERE day = row_num
+GROUP BY submission_date
+)
+
+SELECT 
+table2.submission_date,
+table2.num_sub,
+table1.hacker_id,
+table1.name
+FROM table1
+LEFT JOIN table2
+ON table1.submission_date = table2.submission_date
+WHERE table1.rank# =1
+ORDER BY table2.submission_date;
