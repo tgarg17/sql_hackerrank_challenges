@@ -1,0 +1,26 @@
+WITH 
+raw_table AS 
+        (SELECT h.hacker_id, h.name, COUNT(c.challenge_id) AS num_chlng
+        FROM Hackers h
+        INNER JOIN Challenges c
+        ON c.hacker_id = h.hacker_id
+        GROUP BY h.hacker_id, h.name ),
+
+conditions AS 
+        (SELECT hacker_id, name, num_chlng,
+                CASE 
+                    WHEN num_chlng = (SELECT MAX(num_chlng) FROM raw_table) 
+                        OR num_chlng IN (SELECT num_chlng FROM raw_table 
+                                         GROUP BY num_chlng 
+                                         HAVING COUNT(name) = 1) 
+                    THEN 'KEEP'
+                    ELSE 'DROP'
+                END AS criteria
+    
+        FROM raw_table)
+
+
+SELECT hacker_id, name, num_chlng
+FROM conditions 
+WHERE criteria = 'KEEP'
+ORDER BY 3 DESC, 1;
