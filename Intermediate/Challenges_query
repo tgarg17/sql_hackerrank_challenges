@@ -23,4 +23,4 @@ conditions AS
 SELECT hacker_id, name, num_chlng
 FROM conditions 
 WHERE criteria = 'KEEP'
-ORDER BY 3 DESC, 1;
+ORDER BY num_chlng DESC, hacker_id;
