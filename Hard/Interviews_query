@@ -1,0 +1,40 @@
+
+WITH CLNG_DATA AS (
+SELECT
+clg.contest_id,
+clg.college_id,
+cnt.hacker_id,
+cnt.name,
+clng.challenge_id,
+ss.total_submissions,
+ss.total_accepted_submissions,
+vs.total_views,
+vs.total_unique_views
+FROM Colleges clg
+LEFT JOIN Contests cnt
+ON cnt.contest_id = clg.contest_id
+LEFT JOIN Challenges clng
+ON clng.college_id = clg.college_id
+LEFT JOIN 
+
+(SELECT 
+ challenge_id, 
+ SUM(total_views) AS total_views,
+ SUM(total_unique_views) AS total_unique_views
+ FROM View_stats
+ GROUP BY challenge_id) vs
+ON vs.challenge_id = clng.challenge_id
+LEFT JOIN
+
+(SELECT 
+ challenge_id, 
+ SUM(total_submissions) AS total_submissions,
+ SUM(total_accepted_submissions) AS total_accepted_submissions
+ FROM Submission_Stats
+ GROUP BY challenge_id) ss
+ON ss.challenge_id = clng.challenge_id)
+
+SELECT contest_id, hacker_id, name, SUM(total_submissions), SUM(total_accepted_submissions), SUM(total_views), SUM(total_unique_views)
+FROM CLNG_DATA
+GROUP BY contest_id, hacker_id, name
+HAVING (SUM(total_submissions) IS NOT NULL AND SUM(total_accepted_submissions) IS NOT NULL AND SUM(total_views)IS NOT NULL AND SUM(total_unique_views) IS NOT NULL);
