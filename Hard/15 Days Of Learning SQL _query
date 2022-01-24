@@ -1,3 +1,6 @@
+
+
+**Query:**
 WITH 
     table1 AS(
 SELECT 
