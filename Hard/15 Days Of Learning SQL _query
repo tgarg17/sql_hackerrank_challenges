@@ -1,6 +1,15 @@
+Julia conducted a 15 days of learning SQL contest. The start date of the contest was March 01, 2016 and the end date was March 15, 2016.
 
+Write a query to print total number of unique hackers who made at least 1 submission each day (starting on the first day of the contest), 
+and find the hacker_id and name of the hacker who made maximum number of submissions each day. 
+If more than one such hacker has a maximum number of submissions, print the lowest hacker_id. 
+The query should print this information for each day of the contest, sorted by the date.
 
-**Query:**
+--=============================================================================================================================================================================
+Query:
+
+--Create the Common Table Expressions as table1, table2
+
 WITH 
     table1 AS(
 SELECT 
@@ -23,21 +32,30 @@ table2 AS (
                         s0.hacker_id,
                         DATEPART(DAY, s0.submission_date) AS day
                     FROM(
-                        SELECT submission_date, hacker_id
+                            SELECT 
+                                submission_date, 
+                                hacker_id
                             FROM submissions
-                            GROUP BY submission_date, hacker_id) AS s0
+                            GROUP BY 
+                                submission_date, 
+                                hacker_id) AS s0
          )AS s
-WHERE day = row_num
-GROUP BY submission_date
+WHERE 
+    day = row_num
+GROUP BY 
+    submission_date
 )
 
 SELECT 
-table2.submission_date,
-table2.num_sub,
-table1.hacker_id,
-table1.name
+    table2.submission_date,
+    table2.num_sub,
+    table1.hacker_id,
+    table1.name
 FROM table1
 LEFT JOIN table2
-ON table1.submission_date = table2.submission_date
-WHERE table1.rank# =1
-ORDER BY table2.submission_date;
+ON 
+    table1.submission_date = table2.submission_date
+WHERE 
+    table1.rank# =1
+ORDER BY 
+    table2.submission_date;
