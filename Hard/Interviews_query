@@ -24,7 +24,7 @@ Query:
 
 WITH CLNG_DATA AS (
                    SELECT
-  					  clg.contest_id,
+  					          clg.contest_id,
                       clg.college_id,
                       cnt.hacker_id,
                       cnt.name,
