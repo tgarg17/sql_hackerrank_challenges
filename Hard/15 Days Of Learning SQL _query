@@ -5,6 +5,15 @@ and find the hacker_id and name of the hacker who made maximum number of submiss
 If more than one such hacker has a maximum number of submissions, print the lowest hacker_id. 
 The query should print this information for each day of the contest, sorted by the date.
 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Input Format
+The following tables hold contest data:
+
+    Hackers: The hacker_id is the id of the hacker, and name is the name of the hacker.
+
+    Submissions: The submission_date is the date of the submission, submission_id is the id of the submission, hacker_id is the id 
+                 of the hacker who made the submission, and score is the score of the submission. 
+
 --=============================================================================================================================================================================
 Query:
 
