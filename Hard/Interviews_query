@@ -2,9 +2,9 @@ Samantha interviews many candidates from different colleges using coding challen
 Write a query to print the contest_id, hacker_id, name, and the sums of total_submissions, total_accepted_submissions, total_views, 
 and total_unique_views for each contest sorted by contest_id. Exclude the contest from the result if all four sums are 0.
 
-  Input Format
-
-  The following tables hold interview data:
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Input Format
+The following tables hold interview data:
 
     Contests: The contest_id is the id of the contest, hacker_id is the id of the hacker who created the contest, and name is the name of the hacker.
     
