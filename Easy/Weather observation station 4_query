@@ -1,2 +1,6 @@
+Find the difference between the total number of CITY entries in the table and the number of distinct CITY entries in the table.
+===================================================================================================================================================================================
+Query:
+
 SELECT (COUNT(S.CITY)-COUNT(DISTINCT(S.CITY)))
 FROM STATION AS S;
