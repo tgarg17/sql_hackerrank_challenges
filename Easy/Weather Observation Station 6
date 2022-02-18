@@ -1,6 +1,8 @@
-Query the list of CITY names starting with vowels (i.e., a, e, i, o, or u) from STATION. Your result cannot contain duplicates.
-=============================================================================================================================================================================
-Query:
+--Query the list of CITY names starting with vowels (i.e., a, e, i, o, or u) from STATION. Your result cannot contain duplicates.
+
+--=============================================================================================================================================================================
+--Query:
+--Language: MySQL
 
 SELECT CITY
 FROM STATION
@@ -9,3 +11,29 @@ OR CITY LIKE 'e%'
 OR CITY LIKE 'i%'
 OR CITY LIKE 'o%'
 OR CITY LIKE 'u%';
+
+--=============================================================================================================================================================================
+Sample Solution:
+
+Acme 
+Addison 
+Agency 
+Aguanga 
+Alanson 
+Alba 
+Albany 
+Albion 
+Algonac 
+Aliso Viejo 
+Allerton 
+Alpine 
+Alton 
+Amazonia 
+Amo 
+Andersonville 
+Andover 
+Anthony 
+Archie 
+Arispe 
+{-truncated-}
+
