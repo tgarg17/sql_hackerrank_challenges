@@ -1,0 +1,34 @@
+Query the list of CITY names from STATION that do not start with vowels. Your result cannot contain duplicates.
+
+--================================================================================================================================================================================
+Query:
+Language: MySQL
+
+SELECT DISTINCT(CITY)
+FROM STATION
+WHERE CITY NOT REGEXP "^[aeiou].*$";
+
+--================================================================================================================================================================================
+Sample Solution:
+
+Baileyville 
+Bainbridge 
+Baker 
+Baldwin 
+Barrigada 
+Bass Harbor 
+Baton Rouge 
+Bayville 
+Beaufort 
+Beaver Island 
+Bellevue 
+Benedict 
+Bennington 
+Bentonville 
+Berryton 
+Bertha 
+Beverly 
+Biggsville 
+Bison 
+Blue River {-truncated-}
+
